@@ -18,14 +18,24 @@ class App extends React.Component {
                     task: 'Fill periodic table'
                 }
             ]
-        }
+        };
+
+        this.addNote = this.addNote.bind(this);
     }
 
+    addNote() {
+        this.setState({
+            notes: this.state.notes.concat([{
+                id: uuid.v4(),
+                task: 'New Task'
+            }])
+        });
+    }
     render() {
         const {notes} = this.state;
         return (
             <div>
-                <button onClick={() => console.log('Add New Note')}>Add Note</button>
+                <button onClick={this.addNote}>Add Note</button>
                 <Notes notes={notes} />
             </div>
         )
