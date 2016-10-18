@@ -21,6 +21,7 @@ class App extends React.Component {
         };
 
         this.addNote = this.addNote.bind(this);
+        this.deleteNode = this.deleteNode.bind(this);
     }
 
     addNote() {
@@ -31,12 +32,19 @@ class App extends React.Component {
             }])
         });
     }
+
+    deleteNode(id, e) {
+        e.stopPropagation();
+        this.setState({
+            notes: this.state.notes.filter(note => note.id !== id)
+        });
+    }
     render() {
         const {notes} = this.state;
         return (
             <div>
                 <button onClick={this.addNote}>Add Note</button>
-                <Notes notes={notes} />
+                <Notes notes={notes} onDelete={this.deleteNode} />
             </div>
         )
     }
