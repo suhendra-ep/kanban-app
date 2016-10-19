@@ -1,19 +1,20 @@
 import React from 'react';
 
-const Edits = ({ onEdit = () => { }, value, ...props }) => (
-    <div>
-        <span>edit: {value}</span>
-    </div>
-);
 
-export default ({editing, value, onEdit, ...props}) => {
-    if (editing) {
-        return <Edit value={value} onEdit={onEdit} {...props} />
+class Editabale extends React.Component {
+    constructor(props) {
+        super(props);
     }
 
-    return <span {...props}>{value}</span>;
-}
+    render() {
+        const {editing, value, onEdit, ...props} = this.props;
+        if (editing) {
+            return <Edit value={value} onEdit={onEdit} {...props} />
+        }
 
+        return <Value value={value} {...props} />
+    }
+}
 class Edit extends React.Component {
     constructor(props) {
         super(props);
@@ -48,3 +49,18 @@ class Edit extends React.Component {
         }
     }
 }
+
+class Value extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        const {value, ...props} = this.props;
+        return (
+            <span {...props}>{value}</span>
+        )
+    }
+}
+
+export default Editabale;
