@@ -1,5 +1,5 @@
 import React from 'react';
-
+import classnames from 'classnames';
 
 class Editabale extends React.Component {
     constructor(props) {
@@ -7,12 +7,16 @@ class Editabale extends React.Component {
     }
 
     render() {
-        const {editing, value, onEdit, ...props} = this.props;
+        const {editing, value, onEdit, className, ...props} = this.props;
         if (editing) {
-            return <Edit value={value} onEdit={onEdit} {...props} />
+            return <Edit
+                className={className}
+                value={value}
+                onEdit={onEdit}
+                {...props} />
         }
 
-        return <Value value={value} {...props} />
+        return <Value value={value} className={className} {...props} />
     }
 }
 class Edit extends React.Component {
@@ -23,10 +27,11 @@ class Edit extends React.Component {
     }
 
     render() {
-        const {value, onEdit, ...props} = this.props;
+        const {value, className, onEdit, ...props} = this.props;
         return (
             <input
                 type='text'
+                className={classnames('edit', className)}
                 autoFocus={true}
                 defaultValue={value}
                 onBlur={this.finishEdit}
@@ -56,9 +61,13 @@ class Value extends React.Component {
     }
 
     render() {
-        const {value, ...props} = this.props;
+        const {value, className, ...props} = this.props;
         return (
-            <span {...props}>{value}</span>
+            <span
+                className={classnames('value', className)}
+                {...props}>
+                {value}
+            </span>
         )
     }
 }

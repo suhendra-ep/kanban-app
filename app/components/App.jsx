@@ -70,7 +70,7 @@ class App extends React.Component {
         const {notes} = this.state;
         return (
             <div>
-                <button onClick={this.addNote}>Add Note</button>
+                <button className="add-note" onClick={this.addNote}>Add Note</button>
                 <Notes
                     notes={notes}
                     onDelete={this.deleteNote}
